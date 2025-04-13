@@ -1,11 +1,16 @@
 package com.projetospring.course.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -23,7 +28,8 @@ private String email;
 private String phone;
 private String password;
 
-
+@OneToMany(mappedBy = "client")
+private List<Order> orders = new ArrayList<>();
 
 public Long getId() {
 	return id;
@@ -101,6 +107,10 @@ public boolean equals(Object obj) {
 	} else if (!id.equals(other.id))
 		return false;
 	return true;
+}
+
+public List<Order> getOrders() {
+	return orders;
 }
 
 
